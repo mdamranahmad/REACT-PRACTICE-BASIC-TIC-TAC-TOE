@@ -19,69 +19,33 @@ function Board({ xIsNext, square, onPlay }) {
     nextSquare[i] = xIsNext ? "X" : "O";
     onPlay(nextSquare);
   }
+
+  const squareList = [];
+  for (let r = 0; r < 3; r++) {
+    const rows = [];
+    for (let c = 0; c < 3; c++) {
+      const squaresIndex = r * 3 + c;
+      rows.push(
+        <Square
+          key={squaresIndex}
+          value={square[squaresIndex]}
+          onSquareClick={() => {
+            handleClick(squaresIndex);
+          }}
+        />,
+      );
+    }
+    squareList.push(
+      <div key={r} className="board_row">
+        {rows}
+      </div>,
+    );
+  }
+
   return (
     <>
       <div className="status">{status}</div>
-      <div className="board-row">
-        <Square
-          value={square[0]}
-          onSquareClick={() => {
-            handleClick(0);
-          }}
-        />
-        <Square
-          value={square[1]}
-          onSquareClick={() => {
-            handleClick(1);
-          }}
-        />
-        <Square
-          value={square[2]}
-          onSquareClick={() => {
-            handleClick(2);
-          }}
-        />
-      </div>
-      <div className="board-row">
-        <Square
-          value={square[3]}
-          onSquareClick={() => {
-            handleClick(3);
-          }}
-        />
-        <Square
-          value={square[4]}
-          onSquareClick={() => {
-            handleClick(4);
-          }}
-        />
-        <Square
-          value={square[5]}
-          onSquareClick={() => {
-            handleClick(5);
-          }}
-        />
-      </div>
-      <div className="board-row">
-        <Square
-          value={square[6]}
-          onSquareClick={() => {
-            handleClick(6);
-          }}
-        />
-        <Square
-          value={square[7]}
-          onSquareClick={() => {
-            handleClick(7);
-          }}
-        />
-        <Square
-          value={square[8]}
-          onSquareClick={() => {
-            handleClick(8);
-          }}
-        />
-      </div>
+      {squareList}
     </>
   );
 }
