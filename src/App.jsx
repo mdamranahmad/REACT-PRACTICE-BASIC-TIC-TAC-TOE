@@ -102,7 +102,7 @@ export default function Game() {
       </div>
       <div className="game-info">
         <button onClick={() => setIsToggled(!isToggled)}>
-          Sort: {isToggled ? "Ascending" : "Descending"}
+          Sort: {isToggled ? "Descending" : "Ascending"}
         </button>
         <ol>{orderedMoves}</ol>
       </div>
