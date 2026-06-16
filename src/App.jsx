@@ -53,6 +53,7 @@ function Board({ xIsNext, square, onPlay }) {
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [isToggled, setIsToggled] = useState(false);
   const currentSquare = history[currentMove];
   const xIsNext = currentMove % 2 === 0;
 
@@ -86,6 +87,8 @@ export default function Game() {
     );
   });
 
+  const orderedMoves = isToggled ? moves.toReversed() : moves;
+
   function handlePlay(nextSquare) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquare];
     setHistory(nextHistory);
@@ -98,7 +101,10 @@ export default function Game() {
         <Board xIsNext={xIsNext} square={currentSquare} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{moves}</ol>
+        <button onClick={() => setIsToggled(!isToggled)}>
+          Sort: {isToggled ? "Ascending" : "Descending"}
+        </button>
+        <ol>{orderedMoves}</ol>
       </div>
     </div>
   );
